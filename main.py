@@ -77,6 +77,14 @@ def main(debug):
         i += 1
 
 
+    #'a=baseAttack x attackSpeedPowerCalc x finalDamage x (1-critRate+critRate x ((1-superCritRate) x critDamage+superCritRate x superCritDamage));
+    #(base_attack*MIN(attack_speed,400%)*L6*(1-MIN(L3,100%)+MIN(L3,100%)*((1-J7)*(J8*3)+1+J7*(J8*3)+1)))*J9
+
+    for loadout in loadouts:
+        part1 = loadout.basic_attack * min(loadout.attack_speed, 400) * loadout.final_damage
+        part2 = 1 - loadout.crit_rate * ((1 - loadout.super_crit_rate) * loadout.crit_damage + loadout.super_crit_rate * loadout.super_crit_damage)
+        damage = part1 * part2
+
 
 
 

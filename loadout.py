@@ -5,6 +5,8 @@ class Loadout():
         self.crit_dmg = player.crit_dmg
         self.attack_speed = player.attack_speed
         self.final_damage = player.final_damage
+        self.super_crit_rate = player.super_crit_rate
+        self.super_crit_dmg = player.super_crit_dmg
 
         for item in items:
             self.basic_attack += item.basic_attack
@@ -13,6 +15,8 @@ class Loadout():
             self.attack_speed += item.attack_speed
             self.final_damage += item.final_damage
 
+        self.super_crit_dmg = self.super_crit_dmg * self.crit_dmg / 100
+
 
     def print(self) -> None:
         print(f"Basic Attack: {self.basic_attack}")
@@ -20,4 +24,8 @@ class Loadout():
         print(f"Crit Damage: {self.crit_dmg}")
         print(f"Attack Speed: {self.attack_speed}")
         print(f"Final Damage: {self.final_damage}")
+        print(f"Super Crit Rate: {self.super_crit_rate}")
+        print(f"Super Crit Damage: {self.super_crit_dmg}")
+
+    
         
