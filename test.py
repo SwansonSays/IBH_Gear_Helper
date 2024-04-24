@@ -50,7 +50,7 @@ player = Player(468682,40,1920.00,40.00,338.10,34.81,397.10)
 rune = 734.97 + 120.0452
 player = Player(309060, 40, 1287 + rune,31.78,275.3,28.52,335.2)
 
-print(f" PPPPPLAY: {player.crit_dmg - rune}")
+
 loadout = Loadout(player, all_gear)
 
 loadout.print()
@@ -62,13 +62,14 @@ hit_ratio = 100 - crit_ratio - super_crit_ratio
 
 base_dmg = loadout.basic_attack * (loadout.final_damage / 100) * 1.25
 damage_crit = loadout.crit_dmg / 100 * base_dmg
-damage_super_crit = loadout.super_crit_dmg / 100 * base_dmg
+damage_super_crit = loadout.super_crit_actual_dmg / 100 * base_dmg
 
 total_dmg = (damage_crit * crit_ratio / 100) + (damage_super_crit * super_crit_ratio / 100) + (base_dmg * hit_ratio / 100)
 
 combat_power = min(loadout.attack_speed, 400) / 100 * total_dmg
 
 #Print damage values and compare with expected damage
+'''
 print("\n")
 print(f"crit ratio: {round(crit_ratio, 2)} | {crit_ratio - 65.19}")
 print(f"super crit ratio: {round(super_crit_ratio, 2)} | {super_crit_ratio - 34.81}")
@@ -84,3 +85,4 @@ print(f"power: {round(combat_power, 2)} | 25193710682.67 | {combat_power - 25193
 print(f"power: {round(combat_power / 1000, 2)}a") 
 print(f"power: {round(combat_power / 1000000, 2)}b") 
 print(f"power: {round(combat_power / 1000000000, 2)}c") 
+'''

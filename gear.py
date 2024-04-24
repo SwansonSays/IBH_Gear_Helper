@@ -16,6 +16,7 @@ class StatType(Enum):
 
 class Gear():
     def __init__(self, gear_type: int, stats: list) -> None:
+        self.stats = stats
         self.gear_type = self.validate_gear(gear_type)
         self.basic_attack = 0 
         self.crit_rate = 0
@@ -23,6 +24,8 @@ class Gear():
         self.attack_speed = 0
         self.final_damage = 0
         self.process_stats(stats)
+        self.keep = False
+        self.marked = False
 
 
     '''Combines each affix into total amount of each stat'''
@@ -48,14 +51,14 @@ class Gear():
         else:
             return gear_type
 
-    def print(self) -> None:
+    def print(self, verbose: int) -> None:
         print("\n")
         if(self.gear_type == 0):
             print("Sword")
         elif(self.gear_type == 1):
             print("Armor")
         elif(self.gear_type == 2):
-            print("Helmot")
+            print("Helmet")
         elif(self.gear_type == 3):
             print("Gloves")
         elif(self.gear_type == 4):
@@ -63,8 +66,23 @@ class Gear():
         else:
             print("ERROR!!!")
 
-        print(f"Basic Attack: {self.basic_attack}")
-        print(f"Crit Rate: {self.crit_rate}")
-        print(f"Crit Damage: {self.crit_dmg}")
-        print(f"Attack Speed: {self.attack_speed}")
-        print(f"Final Damage: {self.final_damage}")
+        if(verbose == 0):
+            print(f"Basic Attack: {self.basic_attack}")
+            print(f"Crit Rate: {self.crit_rate}")
+            print(f"Crit Damage: {self.crit_dmg}")
+            print(f"Attack Speed: {self.attack_speed}")
+            print(f"Final Damage: {self.final_damage}")
+        else:
+            for stat in self.stats:
+                if(stat[0] == 0):
+                    print(f"Basic Attack: {stat[1]}")
+                elif(stat[0] == 1):
+                    print(f"Crit Rate: {stat[1]}")
+                elif(stat[0] == 2):
+                    print(f"Crit Damage: {stat[1]}")
+                elif(stat[0] == 3):
+                    print(f"Attack Speed: {stat[1]}")
+                elif(stat[0] == 4):
+                    print(f"Final Damage: {stat[1]}")
+                else:
+                    print("ERROR!!!")
