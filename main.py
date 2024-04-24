@@ -80,7 +80,24 @@ def main(debug):
         print(f"\nFULL LOADOUT #{i+1}\n")
         loadout.print()
         i += 1
-    
+
+
+def get_damage(loadout: Loadout):
+    crit_ratio = min(loadout.crit_rate, 100) * (100 - loadout.super_crit_rate) / 100
+    super_crit_ratio = min(loadout.crit_rate, 100) * loadout.super_crit_rate / 100
+    hit_ratio = 100 - crit_ratio - super_crit_ratio
+
+    base_dmg = loadout.basic_attack * (loadout.final_damage / 100) * 1.25
+    damage_crit = loadout.crit_dmg / 100 * base_dmg
+    damage_super_crit = loadout.super_crit_dmg / 100 * base_dmg
+
+    total_dmg = (damage_crit * crit_ratio / 100) + (damage_super_crit * super_crit_ratio / 100) + (base_dmg * hit_ratio / 100)
+
+    combat_power = min(loadout.attack_speed, 400) / 100 * total_dmg
+
+    print(total_dmg)
+    print(combat_power)
+        
 
 if __name__ == "__main__":
     debug = False

@@ -16,7 +16,7 @@ class StatType(Enum):
 
 class Gear():
     def __init__(self, gear_type: int, stats: list) -> None:
-        self.gear_type = gear_type
+        self.gear_type = self.validate_gear(gear_type)
         self.basic_attack = 0 
         self.crit_rate = 0
         self.crit_dmg = 0
@@ -40,6 +40,13 @@ class Gear():
                 self.final_damage += stat[1]
             else:
                 print("ERROR!!!")
+
+    def validate_gear(self, gear_type):
+        if(not gear_type in range(0,5)):
+            print("ERROR")
+            return -1
+        else:
+            return gear_type
 
     def print(self) -> None:
         print("\n")

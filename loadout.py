@@ -17,6 +17,9 @@ class Loadout():
             self.attack_speed += item.attack_speed
             self.final_damage += item.final_damage
 
+        print(f"ITEM CRIT: {self.crit_dmg - player.crit_dmg}")
+        print(f"PLayer Crit: {player.crit_dmg}")
+
         self.super_crit_dmg = self.super_crit_dmg * self.crit_dmg / 100 #supercrit dmg calculation
 
 
