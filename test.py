@@ -2,6 +2,8 @@ from loadout import Loadout
 from player import Player
 from gear import Gear
 
+
+#hard coded gear and player stats for testing
 sword = Gear(0, [[0,1040184],[1,8.71],[2,0],[3,0],[4,262.35]])
 armor = Gear(1, [[0,94867],[1,8.80],[2,378.13],[3,0],[4,965.36]])
 helmet = Gear(2, [[0,90834],[1,85.03],[2,180.23],[3,0],[4,255.09]])
@@ -28,6 +30,7 @@ total_dmg = (damage_crit * crit_ratio / 100) + (damage_super_crit * super_crit_r
 
 combat_power = min(loadout.attack_speed, 400) / 100 * total_dmg
 
+#Print damage values and compare with expected damage
 print("\n")
 print(f"crit ratio: {round(crit_ratio, 2)} | {crit_ratio - 65.19}")
 print(f"super crit ratio: {round(super_crit_ratio, 2)} | {super_crit_ratio - 34.81}")

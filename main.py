@@ -7,6 +7,7 @@ from itertools import product
 
 def main(debug):
     if(not debug):
+        #input player stats
         print("Player Stats")
         basic_attack = float(input("Enter Player Basic Attack: "))
         crit_rate = float(input("Enter Player Crit Rate: "))
@@ -16,13 +17,14 @@ def main(debug):
         player = Player(basic_attack, crit_rate, crit_dmg, attack_speed, final_damage)
         gear_amount = int(input("Enter amount of gear pieces to compare: "))
 
+        #init gear arrays
         sword_list = []
         armor_list = []
         helmet_list = []
         gloves_list = []
         boots_list = []
 
-
+        #Take user input on gear and input into gear arrays
         for gear in range(0, gear_amount):
             print(f"\n********************Item #{gear+1}********************")
             gear_type = int(input("Sword = 0, Armor = 1, Helmet = 2, Gloves = 3, Boots = 4\nEnter Gear Type: "))
@@ -44,6 +46,7 @@ def main(debug):
             elif(gear_type == 4):
                 boots_list.append(Gear(gear_type, stats))
 
+    #hard coded gear stats for testing
     if(debug):
         sword1 = Gear(0,[[0,1],[0,1],[0,1],[0,1],[0,1],[4,1]])
         sword2 = Gear(0,[[0,2],[0,2],[0,2],[0,2],[0,2],[0,2]])
@@ -58,9 +61,10 @@ def main(debug):
         boots_list = [boots1]
         player = Player(10,10,10,10,10)
 
-
+    #Take product of gear arrays to get every possible combination
     product_list = list(product(sword_list, armor_list, helmet_list, gloves_list, boots_list))
 
+    #create loadout class from each combination and add to loadout array(dont like the naming for this loop can probable combine with next loop)
     loadouts = []
     i = 0
     for loadout in product_list:
@@ -68,26 +72,14 @@ def main(debug):
         print(f"\n***Loadout #{i+1}***")
         i += 1
         for item in loadout:
-            item.print()
+            item.print() #print each individual items stats
 
+    #print each loadouts full stats
     i = 0
     for loadout in loadouts:
         print(f"\nFULL LOADOUT #{i+1}\n")
         loadout.print()
         i += 1
-
-
-    #'a=baseAttack x attackSpeedPowerCalc x finalDamage x (1-critRate+critRate x ((1-superCritRate) x critDamage+superCritRate x superCritDamage));
-    #(base_attack*MIN(attack_speed,400%)*L6*(1-MIN(L3,100%)+MIN(L3,100%)*((1-J7)*(J8*3)+1+J7*(J8*3)+1)))*J9
-
-    for loadout in loadouts:
-        part1 = loadout.basic_attack * min(loadout.attack_speed, 400) * loadout.final_damage
-        part2 = 1 - loadout.crit_rate * ((1 - loadout.super_crit_rate) * loadout.crit_damage + loadout.super_crit_rate * loadout.super_crit_damage)
-        damage = part1 * part2
-
-
-
-
     
 
 if __name__ == "__main__":

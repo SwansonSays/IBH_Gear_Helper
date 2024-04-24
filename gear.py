@@ -25,7 +25,7 @@ class Gear():
         self.process_stats(stats)
 
 
-
+    '''Combines each affix into total amount of each stat'''
     def process_stats(self, stats: list) -> None:
         for stat in stats:
             if(stat[0] == 0):
